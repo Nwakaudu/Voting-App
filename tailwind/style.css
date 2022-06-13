@@ -1,0 +1,340 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* lazy progress */
+.lazy-progress {
+    transition: 1s ease;
+    animation: lazy 2s linear infinite;
+    width: 10%;
+}
+@keyframes lazy {
+    20%{
+        @apply bg-teal-500;
+        width: 20%;
+    }
+    40% {
+        @apply bg-teal-400;
+        margin-left: 40%;
+        width: 40%;
+    }
+    60% {
+        @apply bg-teal-300;
+        margin-left: 60%;
+        width: 60%;
+    }
+    80% {
+        @apply bg-teal-200;
+        margin-left: 80%;
+    }
+    80% {
+        @apply bg-teal-100;
+        margin-left: 80%;
+    }
+    100% {
+        @apply bg-teal-50;
+        margin-left: 100%;
+        width: 100%;
+    }
+}
+/* end of lazy progress */
+/* skeleton loading */
+.animate-pulse-2{
+    animation: p 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.skeleton {
+    @apply transition-all bg-purple-400 dark:bg-purple-800/50 p-2 rounded-full;
+    animation: p 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.skeleton-image{
+    @apply transition-all bg-purple-400 dark:bg-purple-800/50 p-2;
+    animation: p 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes p {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+/* skeleton loading end */
+/* remove light blue tap effect in android*/ 
+select {
+    @apply appearance-none;
+}
+a, button, p, div, span, i, body{
+    -webkit-tap-highlight-color: transparent;
+}
+/* end of remove light blue tap effect in android*/ 
+body{
+    padding-right: 0 !important;
+}
+button{
+    @apply disabled:cursor-not-allowed;
+}
+img,
+video {
+    max-width: none!important
+}
+html, body{
+    @apply selection:bg-purple-900 selection:text-gray-200;
+}
+html:focus-within, body:focus-within{
+    scroll-behavior: smooth;
+}
+/* Sweetalert dark theme */ 
+/* .swal2-input, .swal2-textarea{
+    @apply rounded-md dark:bg-transparent dark:text-gray-200 border-gray-500 transition-all text-base;
+} */
+.swal2-input, .swal2-textarea, .swal2-select {
+    @apply dark:text-gray-300 text-bluegray-900 placeholder-gray-400 dark:border dark:border-[#30363d] border-[0.1px] border-gray-300;
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    border-radius: 0.375rem !important;
+    --tw-border-opacity: 1;
+    border-color: rgba(113, 113, 122, var(--tw-border-opacity)) !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+    transition-property: all !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+}
+.dark .swal2-input, .dark .swal2-textarea {
+    background-color: transparent !important;
+    --tw-text-opacity: 1;
+    color: rgba(228, 228, 231, var(--tw-text-opacity)) !important;
+}
+.swal2-popup, .swal2-popup.swal2-toast{
+    @apply dark:bg-darkBlue-secondary rounded-xl;
+    box-shadow: none !important;
+    border: .1px solid #653394 !important;
+}
+.swal2-title{
+    @apply dark:text-gray-200;
+}
+.swal2-html-container{
+    @apply dark:text-gray-400;
+}
+.swal2-container {
+    @apply dark:bg-gray-900/50;
+}
+.swal2-footer {
+    @apply dark:text-amber-600 text-center;
+}
+/* width */
+
+::-webkit-scrollbar {
+	@apply w-1 h-1 sm:w-0.5 sm:h-0.5 ;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+	@apply bg-transparent;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+	@apply dark:bg-purple-900 bg-gray-500 cursor-pointer;
+}
+
+/* animate.css duration */
+
+.ms-200 {
+    --animate-duration: 200ms;
+}
+
+.ms-300 {
+    --animate-duration: 300ms;
+}
+
+.ms-400 {
+    --animate-duration: 400ms;
+}
+
+.ms-500 {
+    --animate-duration: 500ms;
+}
+
+.ms-600{
+    --animate-duration: 600ms
+}
+
+.ms-700{
+    --animate-duration: 700ms
+}
+.ms-800{
+    --animate-duration: 800ms
+}
+.ms-900{
+    --animate-duration: 900ms
+}
+.ms-slow{
+    --animate-duration: 2000ms
+}
+
+/* end of animate.css duration*/
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown:hover .ic_drp {
+    transform: rotate(90deg);
+}
+
+.chat_sent {
+    --animate-delay: 0.5s;
+    animation: fadeInRight;
+    animation-duration: 1s;
+    @apply first:mt-[5px] flex justify-end w-full mb-[5px];
+}
+
+.sent_msg {
+    @apply w-[fit-content] max-w-[80%] break-words bg-blue-700 p-[10px] rounded-[10px] rounded-tr-none text-gray-100;
+}
+.received_msg {
+    @apply w-[fit-content] max-w-[80%] break-words bg-gray-600 p-[10px] rounded-[10px] rounded-tl-none text-gray-100;
+}
+
+.typing_msg {
+    @apply w-[50px] max-w-[80%] break-words bg-gray-700 p-[10px] rounded-full text-gray-100;
+}
+
+.dot-typing {
+    @apply ml-[10px];
+}
+
+.chat_received {
+    animation: fadeInLeft;
+    animation-duration: 1s;
+    @apply first:mt-[5px] flex w-full mb-[5px];
+}
+
+.typing {
+    animation: fadeInUp;
+    animation-duration: 1s;
+    @apply first:mt-[5px] flex w-full mb-[5px];
+}
+
+.button-input {
+    @apply transition-all text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500;
+}
+.dark_border {
+    @apply dark:border dark:border-[#30363d] border-[0.1px] border-gray-300;
+}
+.dark_border_b {
+    @apply dark:border-b dark:border-[#30363d] border-b-[0.1px] border-gray-300;
+}
+.button{
+    @apply  appearance-none outline-none transition-all px-4 py-2 border border-transparent rounded-md  text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+.button-input-active {
+    @apply transition-all w-full text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-500;
+}
+.my-ring-2{
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+.my-ring-1{
+    @apply focus:outline-none focus:ring-1 focus:ring-offset-1;
+}
+.circle-dot{
+    @apply absolute h-[15px] w-[15px] rounded-full right-[1px] bottom-1;
+}
+/* text input with icon no margin & padding */
+
+.text-main {
+    @apply relative flex w-full flex-wrap items-stretch;
+}
+
+
+/*icon should have a wrapper e.g <span><i>icon here</i></span> */
+
+.text-icon-left {
+    @apply flex z-10 h-full leading-snug font-normal text-center absolute rounded text-base items-center justify-center w-8;
+}
+
+.text-icon-right {
+    @apply cursor-pointer transition-all z-10 right-0 h-full font-normal text-center absolute text-base items-center justify-center flex;
+}
+
+.text-main-input {
+    @apply relative text-base leading-tight border border-gray-800 outline-none transition-all w-full;
+}
+.text-input-icon{
+    @apply transition-all absolute right-2 top-2 cursor-pointer;
+}
+
+/* end of text input with icon */
+
+
+/* nav bar components*/
+
+.nav_btn {
+    @apply selection:bg-transparent xl:w-full xl:hover:tracking-wider xl:hover:font-semibold px-3 py-2 rounded-md last:mr-2 mr-3 cursor-pointer transition-all text-base font-normal;
+}
+.form-group{
+    @apply w-full mb-1 p-1;
+}
+
+/* nav bar end */
+/*svg*/
+.custom-shape-divider-bottom-1629532818 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1629532818 svg {
+    position: relative;
+    display: block;
+    width: calc(170% + 1.3px);
+    height: 326px;
+}
+
+.custom-shape-divider-bottom-1629532818 .shape-fill {
+    @apply dark:fill-[#6B21A8] fill-[#5a3f70] wmsu:fill-[#be123c];
+}
+
+/** For tablet devices **/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .custom-shape-divider-bottom-1629532818 svg {
+        width: calc(182% + 1.3px);
+        height: 359px;
+    }
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+    .custom-shape-divider-bottom-1629532818 svg {
+        width: calc(221% + 1.3px);
+        height: 357px;
+    }
+}
+/*svg end */
+.dark .active-b-green{
+    border-width: .1px !important;
+    border-color: rgba(20, 184, 166, 0.6) !important;
+}
+.active-b-green{
+    border-width: .1px !important;
+    border-color: rgba(20, 184, 166, 0.6) !important;
+}
+.active-bg-green{
+    background-color: rgba(20, 184, 166, 0.1) !important;
+}
+.active-bg-amber{
+    background-color: rgba(217, 119, 6, 0.1) !important;
+}
+.active-bg-rose{
+    background-color: rgba(225, 29, 72, 0.1) !important;
+}
+.dark .active-e-btn{
+    background: #1d2936 !important;  
+}
+.active-e-btn{
+    @apply bg-purple-200/80;
+}

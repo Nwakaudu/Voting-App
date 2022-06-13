@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" class="font-sans" data="<%- election._id %>">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="<%- csrf %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" class="theme-color" content="#6b21a8">
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/x-png">
+    <title><%- election.election_title %></title>
+    <link rel="stylesheet" href="/css/tailwindcss/style.css">
+    <%- include('../cdn/_home') %>
+    <script>
+        document.onreadystatechange = () => {
+            setTimeout( () => {
+                $(".loading").remove()
+                $(".election_details").removeClass("hidden")
+            }, 500)
+        }
+    </script>
+</head>
+<body class="bg-gray-300 dark:bg-[#090c10] transition-all antialiased">
+    <!-- Lazy progress bar -->
+    <%- include('../../lazy/loading-progress') %>
+    <div class="loading flex justify-center w-screen h-screen items-center">
+        <%- include('../../lazy/loading') %>
+    </div>
+    <div class="election_details hidden animate__animated animate__fadeIn ms-500">
+        <div class="header fixed top-0 z-30 w-full flex flex-row p-1 items-center bg-gray-50 dark:bg-[#161b22] shadow-md">
+            <div class="flex-[20%] xl:flex-[50%] md:flex-[80%]">
+                <div class="flex flex-row items-center transition-all">
+                    <a href="<%- link %>" class="return_main transition-all text-gray-700 dark:text-gray-50 text-2xl cursor-pointer ml-3 mr-2">
+                        <i class="fa fa-arrow-circle-left"></i>
+                    </a>
+                    <p class="m-0 p-3 text-lg font-medium cursor-pointer dark:text-gray-200" id="election_title"><%- election.election_title %></p>
+                </div>
+            </div>
+            <div class="flex-[80%] xl:flex-[50%] md:flex-[20%]">
+                <div class="nav_open_hidden hidden xl:w-full xl:flex justify-end mr-2">
+                    <a class="cursor-pointer p-2 text-2xl rpl e_nav dark:text-gray-100">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <div animate-in="animate__animated animate__fadeInRight ms-300" animate-out="animate__animated animate__fadeOutRight ms-300" class="e_nav_main transition-all  flex xsm:w-[95%] xl:hidden xl:w-[350px] xl:p-2 xl:fixed xl:right-0 xl:h-full xl:bg-gray-100 xl:dark:bg-[#171b22]  xl:top-0 xl:shadow-2xl xl:flex-col xl:justify-start xl:items-start flex-row justify-end items-center w-full">
+                    <div class="hidden xl:flex xl:justify-end xl:items-end w-full">
+                        <i class="cls_e_nav float-right text-red-700 text-2xl cursor-pointer pr-3 pt-3 dark:text-[#cccbcb]">
+                            <i class="fa fa-times-circle"></i>
+                        </i>
+                    </div>
+                    <div class="center_btns flex flex-row items-center justify-center mr-2 border-red-800 border-r-2 xl:pb-3 xl:border-r-0 xl:border-b-2 xl:flex xl:flex-col xl:w-full xl:gap-2 xl:justify-start xl:items-start xl:px-2 xl:mt-4 transition-all">
+                        <a href="voters/" class="rpl nav_btn dark:text-gray-300">Voters</a>
+                        <a href="candidates/" class="rpl nav_btn dark:text-gray-300">Candidates</a>
+                        <a data="partylist" class="election_btn rpl nav_btn dark:text-gray-300">Partylist</a>
+                        <a data="positions" class="election_btn rpl nav_btn dark:text-gray-300">Positions</a>
+                        <a href="/control/elections/<%- election._id %>/results/" class="rpl nav_btn dark:text-gray-300">Results</a>
+                        <a data="settings" class="election_btn rpl nav_btn dark:text-gray-300">Settings</a>
+                    </div>
+                    <div class="election_status xl:flex xl:justify-center xl:w-full xl:h-full xl:items-end xl:pb-2">
+                        <%- include('election-status', {election: election}) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="e_main_content w-full px-2 py-1 mt-16 transition-all">
+            <div class="container election-date-time">
+                <%- include('election-date-time', {
+                    election: election
+                }) %>
+            </div>
+            <div class="container mt-6">
+                <div class="py-2">
+                    <span class="dark:text-gray-300 text-2xl">Dashboard</span>
+                </div>
+                <div class="container mt-6">
+                    <div class="gap-3 grid grid-cols-3 xl:gap-4 my:grid-cols-2 md:grid-cols-1 sm:grid-cols-none transition-all ">
+                        <a title="Total count of accepted voters" href="voters/" class="cursor-pointer w-full rpl dark:bg-green-700/50 bg-green-600/70 shadow-md rounded-md p-4 transition-all ">
+                            <div class="grid grid-cols-2 transition-all">
+                                <div class="text flex flex-col ml-3 mt-1 gap-3">
+                                    <div class="text-4xl font-medium mt-1 tracking-wider dark:text-gray-100 text-white" id="accepted_voter_count"><%- accepted_voters %></div>
+                                    <span class="font-normal text-sm tracking-wide dark:text-gray-300 text-white">No. of  Voters</span>
+                                </div>
+                                <div class="ic flex items-center w-full justify-end">
+                                    <i class="fad fa-users text-6xl dark:text-green-500 text-green-700"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <div data="partylist" class="election_btn cursor-pointer w-full rpl dark:bg-yellow-700/50 bg-yellow-600/50 shadow-md rounded-md p-4 transition-all ">
+                            <div class="grid grid-cols-2 transition-all ">  
+                                <div class="text flex flex-col ml-3 mt-1 gap-3">
+                                    <div class="text-4xl font-medium mt-1 tracking-wider dark:text-gray-100 text-white" id="partylist_count"><%- election.partylist.length %></div>
+                                    <span class="font-normal text-sm tracking-wide dark:text-gray-300 text-white">No. of Partylist</span>
+                                </div>
+                                <div class="ic flex items-center justify-end">
+                                    <i class="fad fa-balance-scale text-6xl dark:text-yellow-500 text-yellow-700"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="candidates/" class="w-full  rpl cursor-pointer dark:bg-purple-700/50 bg-purple-600/50 shadow-md rounded-md p-4 transition-all ">
+                            <div class="grid grid-cols-2 transition-all ">
+                                <div class="text flex flex-col ml-3 mt-1 gap-3">
+                                    <div class="e_pend_count_ca text-4xl font-medium mt-1 tracking-wider dark:text-gray-100 text-white" id="accepted_candidates_count"><%- accepted_candidates %></div>
+                                    <span class="font-normal text-md tracking-wide dark:text-gray-300 text-white">No. of Candidates</span>
+                                </div>
+                                <div class="ic flex items-center justify-end">
+                                    <i class="fad fa-poll-people text-6xl dark:text-purple-500 text-purple-700"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="w-full election_btn dark:bg-rose-700/50 bg-rose-600/50 shadow-md rounded-md p-4 transition-all ">
+                            <div class="grid grid-cols-2 transition-all ">
+                                <div class="text flex flex-col ml-3 mt-1 gap-3">
+                                    <div class="text-4xl font-medium mt-1 tracking-wider dark:text-gray-100 text-white" id="voter_voted_count">0</div>
+                                    <span class="font-normal text-md tracking-wide dark:text-gray-300 text-white">Voters voted</span>
+                                </div>
+                                <div class="ic flex items-center justify-end">
+                                    <i class="fad fa-edit text-6xl dark:text-rose-500 text-rose-700"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div data="positions" class="w-full rpl cursor-pointer election_btn dark:bg-violet-700/50 shadow-md bg-violet-600/70 rounded-md p-4 transition-all ">
+                            <div class="grid grid-cols-2 transition-all ">
+                                <div class="text flex flex-col ml-3 mt-1 gap-3">
+                                    <div class="text-4xl font-medium mt-1 tracking-wider dark:text-gray-100 text-white" id="positions_count"><%- election.positions.length %></div>
+                                    <span class="font-normal text-md tracking-wide dark:text-gray-300 text-white">No. of Positions</span>
+                                </div>
+                                <div class="ic flex items-center justify-end">
+                                    <i class="fad fa-list-ol text-6xl dark:text-violet-500 text-violet-700"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-6">
+                <% 
+                    function c(val) {
+                        for (let c = 0; c < data.course.length; c++) {
+                            if (val === data.course[c].id) {
+                                return data.course[c].type
+                            }
+                        }
+                    }
+                    function y(val) {
+                        for (let c = 0; c < data.year.length; c++) {
+                            if (val === data.year[c].id) {
+                                return data.year[c].type
+                            }
+                        }
+                    }
+                %>
+                <div class="grid md:flex md:flex-col grid-cols-4 gap-3 xl:grid-cols-3 md:grid-cols-2 xl:gap-4 transition-all">
+                    <div data="courses" class="election_btn cursor-pointer rpl shadow-md bg-gray-50 dark:bg-emerald-700/50 bg-emerald-600/50 rounded-md p-3 transition-all">
+                        <div class="container flex">
+                            <span class="font-medium p-1 dark:text-gray-300 dark:font-normal text-white">Eligible Courses</span>
+                        </div>
+                        <div class="e_course_list p-1 flex flex-wrap gap-2">
+                            <% const e_crs = election.courses %>
+                            <% for (let i = 0; i < e_crs.length; i++) { %>
+                                <div style="border-color: rgba(126, 34, 206, 1)" class="border p-1 px-3 rounded-full cursor-pointer">
+                                    <span class="dark:text-gray-300/90 text-gray-100"><%- c(e_crs[i]) %></span>
+                                </div> 
+                            <% } %>
+                        </div>
+                    </div>
+                    <div data="year" class="election_btn rpl cursor-pointer shadow-md bg-gray-50 dark:bg-pink-700/50 bg-pink-600/50 rounded-md p-3 transition-all">
+                        <div class="container flex">
+                            <span class="font-medium p-1 dark:text-gray-300 dark:font-normal text-white">Eligible Year</span>
+                        </div>
+                        <div class="e_year_list p-1 flex flex-wrap gap-2">
+                            <% const e_yr = election.year %>
+                            <% for (let i = 0; i < e_yr.length; i++) { %>
+                                <div style="border-color: rgba(126, 34, 206, 1)" class="border p-1 px-3 rounded-full cursor-pointer">
+                                    <span class="text-gray-100 dark:text-gray-300/90"><%- y(e_yr[i]) %></span>
+                                </div> 
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-6">
+                <%- include('votes-tally', {
+                    election: election,
+                    positions: data.positions
+                }) %>
+            </div>
+        </div>
+        <!-- election partylist -->
+        <%- include('election_partylist', {
+            election_partylist: election.partylist, 
+            partylists: data.partylist
+        }) %> 
+        <!-- election positions -->
+        <%- include('election-positions') %>
+        <!-- election settings -->
+        <div class="election_settings">
+            <%- include('election-settings') %>
+        </div>
+        <!-- candidacy info -->
+        <div class="candidacy-info"></div>
+        <!-- election course -->
+        <div class="course">
+            <%- include('election-course') %>
+        </div>
+        <!-- election year -->
+        <div class="year">
+            <%- include('election-year') %>
+        </div>
+    </div>
+    <script src="/js/theme.js "></script>
+    <script src="/js/avatar.js "></script>
+    <script src="/js/color.js "></script>
+    <script src="/js/fetch.js "></script>
+    <script src="/js/time.js "></script>
+    <script src="/js/toast.js "></script>
+    <script src="/js/audio_file.js "></script>
+    <script src="/js/audio.js "></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/control/js/io.js "></script>
+    <script src="/control/js/election-details.js"></script>
+    <script>
+        $.ripple(".rpl", {
+            debug: false,
+            on: 'mousedown',
+            opacity: 0.3,
+            color: "auto",
+            multi: false,
+            duration: 0.7,
+            rate: function(pxPerSecond) {
+                return pxPerSecond;
+            },
+            easing: 'linear'
+        })
+    </script>
+</body>
+</html>

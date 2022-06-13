@@ -1,0 +1,11 @@
+<div animate-in="animate__animated animate__fadeIn ms-500" animate-out="animate__animated animate__fadeOut ms-500" class="notification z-10 hidden fixed right-0 top-16 dark:bg-darkBlue-secondary w-[400px] sm:w-full h-[calc(100vh-80px)] rounded-b-md">
+    <div class="flex items-center justify-start py-2.5 px-3">
+        <span class="dark:text-gray-300 text-xl">Notifications</span>
+    </div>
+    <div class="notifications_list flex flex-col gap-2.5 px-2.5 pb-5 h-[calc(100%-48px)] overflow-y-auto overflow-x-hidden">
+        <div class="notification_skeleton hidden w-full h-full justify-center items-center dark:text-purple-800 text-5xl">
+            <i class="fad animate-spin fa-spinner-third"></i>
+        </div>
+    </div>
+</div>
+<script src="/js/notifications.js"></script>

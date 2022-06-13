@@ -1,0 +1,41 @@
+<div data="<%- kachat._id %>" class="conversation animate__animated animate__fadeInUp ms-500 fixed right-2 sm:right-0 bottom-0 sm:bottom-[.5px] dark:bg-darkBlue-secondary w-96 sm:w-full h-[61px] dark_border rounded-t-md">
+    <div class="rpl cursor-pointer flex flex-row py-1.5 px-1.5 gap-1 dark_border_b">
+        <div class="conversation_header flex-[60%] flex flex-row items-center">
+            <img class="h-12 w-12 object-cover rounded-full" src="/profile/<%- kachat.student_id %>/">
+            <div class="flex flex-col px-1.5 gap-[1px] chat-status">
+                <span class="dark:text-gray-300 text-sm"><%- `${kachat.firstname} ${kachat.middlename} ${kachat.lastname}` %></span>
+                <% if(kachat.socket_id === "Offline") { %> 
+                    <span class="user-chat-status dark:text-gray-500 text-xs">Offline</span>
+                <% } else { %> 
+                    <span class="user-chat-status dark:text-teal-600 text-xs">Online</span>
+                <% } %>
+            </div>
+        </div>
+        <div class="flex-[40%] flex justify-end items-center">
+            <a class="close-kachat rpl cursor-pointer px-2.5 py-2 dark:text-gray-300 text-xl rounded-full">
+                <i class="fas fa-times-circle"></i>
+            </a>
+        </div>
+    </div>
+    <div class="conversation_main conatiner hidden flex-col h-[calc(100%-61px)]">
+        <div class="conversations_main_list flex-[90%] gap-2.5 flex flex-col dark_border_b py-1.5 px-1 overflow-y-auto overflow-x-hidden">
+            <div class="conversations_main_list_skeleton hidden w-full h-full justify-center items-center dark:text-purple-800 text-5xl">
+                <i class="fad animate-spin fa-spinner-third"></i>
+            </div>
+        </div>
+        <div class="flex-[10%] ">
+            <div class="flex flex-row items-center h-full">
+                <div class="p-1 overflow-x-hidden">
+                    <div class="relative w-full">
+                        <textarea class="message-content pr-8 dark:bg-darkBlue-secondary dark_border overflow-y-auto h-auto resize-none gri dark:text-gray-200 text-input w-full p-2 outline-none dark:focus:border-purple-700 transition-all rounded-lg"></textarea>
+                        <button type="button" class="send_message right-2.5 top-2 absolute cursor-pointer dark:text-cyan-600 text-xl">
+                            <i class="fad fa-paper-plane"></i>
+                        </>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/conversations.js"></script>
+<script src="/js/scroll_div.js"></script>
